@@ -1,0 +1,34 @@
+﻿    <%- include('mainheader',{title: "Jelszóváltoztatás"}) -%>
+
+    <form method="POST" class="form-signin">
+        <div mb-4">
+            <h1 class="h1 mb-3 font-weight-normal text-center"><u>Jelszóváltoztatás</u></h1>
+        </div>
+
+        <div class="form-label-group col-3 mx-auto  mb-3">
+            <label for="inputPassword">Régi jelszó:</label>
+            <input type="password" name="password" class="form-control" placeholder="Régi jelszó" required autofocus>
+        </div>
+
+        <div class="form-label-group col-3 mx-auto  mb-3">
+            <label for="inputPassword">Új jelszó:</label>
+            <input type="password" name="newpassword" class="form-control" placeholder="Új jelszó:" required>
+        </div>
+
+        <div class="form-label-group col-3 mx-auto  mb-3">
+            <label for="inputPassword">Ismételt új jelszó:</label>
+            <input type="password" name="newpasswordagain" class="form-control" placeholder="Ismételt új jelszó" required>
+        
+		<% if(typeof error !== "undefined"){ %>
+		<div class="alert alert-danger"><%= error %></div>
+            <% } %>
+
+		</div>
+
+        <div class="text-center">
+            <a class="btn btn-warning" href="/szemelyek" role="button">Vissza</a>
+            <input type="submit" class="btn btn-primary"  value="Mentés"/>
+        </div>
+    </form>
+
+    <%- include('footer') -%>

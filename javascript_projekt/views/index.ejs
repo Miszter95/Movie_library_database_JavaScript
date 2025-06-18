@@ -1,0 +1,35 @@
+﻿    <%- include('mainheader',{title: "Bejelentkezés"}) -%>
+
+    <form class="form-signin" method="POST">
+        <div mb-4">
+            <h1 class="h1 mb-3 font-weight-normal text-center"><u>Filmtár</u></h1>
+        </div>
+
+        <div class="form-label-group col-3 mx-auto">
+            <label>Felhasználónév:</label>
+            <input type="text" name="username" class="form-control" placeholder="Felhasználónév">
+        </div>
+
+        <div class="form-label-group col-3 mb-3 mx-auto">
+            <label>Jelszó:</label>
+            <input type="password" name="password" class="form-control" placeholder="Jelszó" required>
+        <% if(typeof error !== "undefined") {%>
+            <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+        </div>
+
+        <div class="mb-3 text-center">
+            <a href="/jelszoemlek">Jelszó emlékeztető</a>
+        </div>
+
+        <div class="mb-3 text-center">   
+            <a href="/regisztracio">Regisztráció</a>
+        </div>
+
+        <div class="text-center">
+            <input type="submit" class="btn btn-lg btn-primary btn-block col-3 mx-auto" value="Bejelentkezés"/>
+            <p class="mt-5 mb-3 text-muted text-center">&copy; 2015-2019</p>
+        </div>
+    </form>
+
+    <%- include('footer') -%>

@@ -1,0 +1,46 @@
+﻿    <%- include('header',{title: "Személyek szerkesztése"}) -%>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="h1 mb-3 font-weight-normal text-center"><u>Személy
+                    <% if (typeof szemely === "undefined") { %>
+                        létrehozása
+                    <% }else{ %>
+                        szerkesztése
+                    <% } %></u></h1>
+                <form method="Post">
+                    <input type="hidden" name="kod"
+                    value="<%= (typeof szemely === "undefined") ? "" : szemely._id %>"/>
+
+                    <div class="form-group">
+                        <label for="nev">Név:</label>
+                        <input type="text" class="form-control" id="nev" name="nev"
+                               value="<%= (typeof szemely === "undefined") ? "" : szemely.nev %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="kor">Kor:</label>
+                        <input type="text" class="form-control" id="kor" name="kor"
+                               value="<%= (typeof szemely === "undefined") ? "" : szemely.kor %>">
+                        <% if(typeof error !== "undefined") {%>
+                        <div class="alert alert-danger"><%= error %></div>
+                        <% } %>
+                    </div>
+                    <div class="form-group">
+                        <label for="becenev">Becenév:</label>
+                        <input type="text" class="form-control" id="becenev" name="becenev"
+                               value="<%= (typeof szemely === "undefined") ? "" : szemely.becenev %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="nem">Nem:</label>
+                        <input type="text" class="form-control" id="nem" name="nem"
+                                value="<%= (typeof szemely === "undefined") ? "" : szemely.nem %>">
+                    </div>
+                    <input type="submit" class="btn btn-primary"  value="Mentés"/>
+                    <a class="btn btn-warning" href="/szemelyek">Vissza</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer') -%>

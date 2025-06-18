@@ -1,0 +1,49 @@
+﻿    <%- include('header',{title: "Filmek szerkesztése"}) -%>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="h1 mb-3 font-weight-normal text-center"><u>Filmek
+                    <% if (typeof film === "undefined") { %>
+                        létrehozása
+                    <% }else{ %>
+                        szerkesztése
+                    <% } %></u></h1>
+                <form method="Post">
+                    <input type="hidden" id="kod"
+                    value="<%= (typeof film === "undefined") ? "" : film._id %>"/>
+
+                    <div class="form-group">
+                        <label for="cim">Film címe:</label>
+                        <input type="text" class="form-control" id="cim" name="cim"
+                               value="<%= (typeof film === "undefined") ? "" : film.cim %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="mufaj">Műfaj:</label>
+                        <input type="text" class="form-control" id="mufaj" name="mufaj"
+                               value="<%= (typeof film === "undefined") ? "" : film.mufaj %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="hossz">Hossz (percben):</label>
+                        <input type="text" class="form-control" id="hossz" name="hossz"
+                               value="<%= (typeof film === "undefined") ? "" : film.hossz %>">
+                       <% if(typeof error !== "undefined") {%>
+                        <div class="alert alert-danger"><%= error %></div>
+                        <% } %>
+                    </div>
+                    <div class="form-group">                   
+                        <label for="imdbpont">IMDB pont (szammal):</label>
+                        <input type="text" class="form-control" id="imdbpont" name="imdbpont"
+                               value="<%= (typeof film === "undefined") ? "" : film.imdbpont %>">
+                         <% if(typeof errorajanl !== "undefined") {%>
+                        <div class="alert alert-danger"><%= errorajanl %></div>
+                        <% } %>
+                    </div>
+                    <input type="submit" class="btn btn-primary"  value="Mentés"/>
+                    <a class="btn btn-warning" href="/filmek/<%= szemely._id %>">Vissza</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer') -%>

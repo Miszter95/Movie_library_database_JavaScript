@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\config",
+    "\\middlewares",
+    "\\middlewares\\authentication",
+    "\\middlewares\\common",
+    "\\middlewares\\szemely",
+    "\\models",
+    "\\route"
+  ],
+  "SelectedNode": "\\route\\route.js",
+  "PreviewInSolutionExplorer": false
+}

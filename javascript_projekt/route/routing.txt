@@ -1,0 +1,198 @@
+Filmtár (Személyek és filmek)
+
+- index.html					- login form + remember me checkbox, jelszóemlékeztetõ hivatkozás
+
+- jelszoemlekezteto.html		- email cím megadása után megadja a jelszót + rendben gomb, vissza gomb
+
+- jelszovalt.html				- régi jelszó megadása után jelszóváltoztatás és mentés + vissza gomb
+
+- regisztracio.html				- email cím és jelszó megadása után regisztrálja a felhasználót a rendszerben + regisztráció gomb, vissza gomb
+
+- szemelyeklistaja.html			- táblázat az adatbázis személyeinek adatairól (edit, delete), hivatkozas a filmekre + uj személy gomb
+								  + navigation bar (jelszóváltoztatás, sign out, személy hivatkozás)
+
+- szemelyekszerkesztese.html	- személyek adatainak (edit, delete, save) + vissza gomb
+								  + navigation bar (jelszóváltoztatás, sign out, személy hivatkozás)
+
+- egyszemelyfilmjei.html		- személyenkét a filmek adatainak táblázata (edit, delete) + új film gomb, vissza gomb
+								  + navigation bar (jelszóváltoztatás, sign out, személy hivatkozás)
+
+- filmekszerkesztése.html		- fimek adatainak (edit, delete, save) + vissza gomb 
+								  + navigation bar (jelszóváltoztatás, sign out, személy hivatkozás)
+
+Routing
+
+middlewares/authentication/
+	- checkUserLoginMw
+	- regUserMw
+	- getUserByEmailMw
+	- checkPassMw
+	- authMw
+	- savePassMw
+	- sendPassMw
+
+middlewares/szemely/
+	- getSzemelyekMw
+	- getSzemelyMw
+	- nevRendezMw
+	- csnevRendezMw
+	- korRendezMw
+	- cskorRendezMw
+	- saveSzemelyMw
+	- delSzemelyMw
+
+middlewares/film/
+	- getFilmekMw
+	- getFilmMw
+	- cimRendezMw
+	- cscimRendezMw
+	- hosszRendezMw
+	- cshosszRendezMw
+	- imdbpontRendezMw
+	- csimdbpontRendezMw
+	- saveFilmMw
+	- delFilmMW
+
+middlewares/common/
+	- renderMw
+
+
+
+Get, Post /											- kijelentkezés után erre az oldara jutunk
+checkUserLoginMw									- email cím és jelszó ellenõrzés, ok esetén, szemelyeklistájára redirect, különben vissza a fõoldalra
+renderMw("index.html")
+	nem ok esetén: res.redirect("/")
+
+Get, Post /regisztracio
+regUserMw
+renderMw("regisztracio.html")
+
+GET, Post /jelszoemlek
+getUserByEmailMw
+sendPassMw
+renderMw("jelszoemlekezteto.html")
+
+GET, POST /jelszovalt
+authMw
+checkPassMw													- jelszó ellenõrzés, ok esetén jelszócsere
+savePassMw
+renderMw("jelszovalt.html")	
+
+GET, Post /szemelyek										- + navigation bar
+authMw
+getSzemelyekMw
+nevRendezMw
+korRendezMw
+renderMw("szemelyeklistaja.html")
+
+
+GET, Post /szemelyek/nevrendezett
+authMw
+nevRendezMw
+renderMw("szemelyeklistaja.html")
+
+GET, Post /szemelyek/csnevrendezett
+authMw
+csnevRendezMw
+renderMw("szemelyeklistaja.html")
+
+GET, Post /szemelyek/korrendezett
+authMw
+korRendezMw
+renderMw("szemelyeklistaja.html")
+
+GET, Post /szemelyek/cskorrendezett
+authMw
+cskorRendezMw
+renderMw("szemelyeklistaja.html")
+
+GET, POST /szemelyek/uj										- + navigation bar
+authMw
+saveSzemelyMw
+renderMw(szemelyekszerkesztese.html (new))
+ha van érték beküldbe, akkor a form elemek azokkal töltödjenek fel
+ha nem, akkor nem
+
+GET, Post /szemelyek/:szemelyid/szerkesztes					- szemelyekszerkesztese.html (edit) + navigation bar
+authMw
+getSzemelyMw
+saveSzemelyMw
+renderMw(szemelyekszerkesztese.html (new))
+ha van érték beküldbe, akkor a form elemek azokkal töltödjenek fel
+ha nem, akkor nem
+
+GET /szemelyek/:szemelyid/torles
+authMw
+getSzemelyMw
+delSzemelyMw
+
+GET, POST /filmek/:szemelyid								- + navigation bar
+authMw
+getSzemelyMw
+getFilmekMw
+cimRendezMw
+hosszRendezMw
+renderMw("filmeklistaja.html")
+
+GET, POST /filmek/:szemelyid/cimrendezett
+authMw
+getSzemelyMw
+cimRendezMw
+renderMw("filmeklistaja.html")
+
+GET, POST /filmek/:szemelyid/cscimrendezett
+authMw
+getSzemelyMw
+cscimRendezMw
+renderMw("filmeklistaja.html")
+
+GET, POST /filmek/:szemelyid/hosszrendezett
+authMw
+getSzemelyMw
+hosszRendezMw
+renderMw("filmeklistaja.html")
+
+GET, POST /filmek/:szemelyid/cshosszrendezett
+authMw
+getSzemelyMw
+cshosszRendezMw
+renderMw("filmeklistaja.html")
+
+GET, POST /filmek/:szemelyid/imdbpontrendezett
+authMw
+getSzemelyMw
+imdbpontRendezMw
+renderMw("filmeklistaja.html")
+
+GET, POST /filmek/:szemelyid/csimdbpontrendezett
+authMw
+getSzemelyMw
+csimdbpontRendezMw
+renderMw("filmeklistaja.html")
+
+GET, POST /filmek/uj/:szemelyid								- + navigation bar
+authMw
+getSzemelyMw
+getFilmMw
+saveFilmMw
+renderMw("filmekszerkesztese.html (new)")
+ha van érték beküldbe, akkor a form elemek azokkal töltödjenek fel
+ha nem, akkor nem
+
+GET, POST /filmek/:szemelyid/:filmid/szerkesztes		- + navigation bar
+authMw
+getSzemelyMw
+getFilmMw
+saveFilmMw
+renderMw("filmekszerkesztese.html edit()")
+ha van érték beküldbe, akkor a form elemek azokkal töltödjenek fel
+ha nem, akkor nem
+
+GET /filmek/:szemelyid/:filmid/torles
+authMw
+getSzemelyMw
+getFilmMw
+delFilmMw
+
+GET, POST /kijelentkezes
+logoutMw

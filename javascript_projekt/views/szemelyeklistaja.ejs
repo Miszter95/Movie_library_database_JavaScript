@@ -1,0 +1,47 @@
+﻿    <%- include('header',{title: "Személyek listája"}) -%>
+
+    <h1 class="h1 mb-3 font-weight-normal text-center"><u>Személyek listája</u></h1>
+
+    <table class="table table-bordered table-dark col-5 mx-auto">
+        
+        <thead>
+            <tr style="background:#000000" align="center">
+                <th scope="col">Név
+                    <a class="mb-3 ml-3 text-center" href="/szemelyek/nevrendezett" data-toggle="tooltip" data-placement="top" title="Növekvő rendezés"><i class="fas fa-sort-up"></i></a> 
+                    <a class="mb-3 ml-3 text-center" href="/szemelyek/csnevrendezett" data-toggle="tooltip" data-placement="top" title="Csökkenő rendezés"><i class="fas fa-sort-down"></i></a>
+                </th>
+                <th scope="col">Kor
+                    <a class="mb-3 ml-3 text-center" href="/szemelyek/korrendezett" data-toggle="tooltip" data-placement="top" title="Növekvő rendezés"><i class="fas fa-sort-up"></i></a>
+                    <a class="mb-3 ml-3 text-center" href="/szemelyek/cskorrendezett" data-toggle="tooltip" data-placement="top" title="Csökkenő rendezés"><i class="fas fa-sort-down"></i></a>
+                </th>
+                <th scope="col">Becenév</th>
+                <th scope="col">Nem</th>
+                <th scope="col">Filmek</th>
+                <th scope="col">Szerkesztés</th>
+            </tr>
+        </thead>
+
+          <% szemelyek.forEach(function(egySzemely){ %>
+
+        <tbody>
+            <tr>
+                <th scope="row"><%= egySzemely.nev %></th>
+                <td><%= egySzemely.kor %></td>
+                <td><%= egySzemely.becenev %></td>
+                <td><%= egySzemely.nem %></td>
+                <td>
+                    <a href="/filmek/<%= egySzemely._id %>">Filmek</a>
+                </td>
+                <td>
+                    <a class="mb-3 text-center btn btn-primary" href="/szemelyek/<%= egySzemely._id %>/szerkesztes" data-toggle="tooltip" data-placement="top" title="Módosítás"><i class="far fa-edit"></i></a>    
+                    <a class="mb-3 text-center btn btn-danger"  href="/szemelyek/<%= egySzemely._id %>/torles" data-toggle="tooltip" data-placement="top" title="Törlés"><i class="far fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        </tbody>
+
+          <% }); %>
+    </table>
+
+    <a class="btn btn-block btn-primary col-3 mx-auto" href="/szemelyek/uj" role="button">Új személy hozzáadása</a>
+
+   <%- include('footer') -%>

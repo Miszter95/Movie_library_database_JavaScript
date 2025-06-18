@@ -1,0 +1,48 @@
+﻿    <%- include('header',{title: "Személy filmje"}) -%>
+
+    <h1 class="h1 mb-3 font-weight-normal text-center"><u>Filmek</u></h1>
+
+    <table class="table table-bordered table-dark col-5 mx-auto">
+        <thead>
+            <tr style="background:#000000" align="center">
+                <th scope="col">Film címe
+                    <a class="mb-3 ml-3 text-center" href="/filmek/<%= szemely._id %>/cimrendezett" data-toggle="tooltip" data-placement="top" title="Növekvő rendezés"><i class="fas fa-sort-up"></i></a>
+                    <a class="mb-3 ml-3 text-center" href="/filmek/<%= szemely._id %>/cscimrendezett" data-toggle="tooltip" data-placement="top" title="Csökkenő rendezés"><i class="fas fa-sort-down"></i></a>
+                </th>
+                <th scope="col">Műfaj</th>
+                <th scope="col">Hossz (percben)
+                    <a class="mb-3 ml-3 text-center" href="/filmek/<%= szemely._id %>/hosszrendezett" data-toggle="tooltip" data-placement="top" title="Növekvő rendezés"><i class="fas fa-sort-up"></i></a>
+                    <a class="mb-3 ml-3 text-center" href="/filmek/<%= szemely._id %>/cshosszrendezett" data-toggle="tooltip" data-placement="top" title="Csökkenő rendezés"><i class="fas fa-sort-down"></i></a>
+                </th>
+                <th scope="col">Imdb pont
+                    <a class="mb-3 ml-3 text-center" href="/filmek/<%= szemely._id %>/imdbpontrendezett" data-toggle="tooltip" data-placement="top" title="Növekvő rendezés"><i class="fas fa-sort-up"></i></a>
+                    <a class="mb-3 ml-3 text-center" href="/filmek/<%= szemely._id %>/csimdbpontrendezett" data-toggle="tooltip" data-placement="top" title="Csökkenő rendezés"><i class="fas fa-sort-down"></i></a>
+                </th>
+                <th scope="col">Szerkesztés</th>
+            </tr>
+        </thead>
+
+         <% filmek.forEach(function(egyFilm){ %>
+
+        <tbody>
+            <tr>
+                <td><%= egyFilm.cim %></td>
+                <td><%= egyFilm.mufaj %></td>
+                <td><%= egyFilm.hossz %></td>      
+                <td><%= egyFilm.imdbpont %></td>            
+                <td>
+                    <a class="mb-3 text-center btn btn-primary" href="/filmek/<%= szemely._id %>/<%= egyFilm._id %>/szerkesztes" data-toggle="tooltip" data-placement="top" title="Módosítás"><i class="far fa-edit"></i></a>
+                    <a class="mb-3 text-center btn btn-danger" href="/filmek/<%= szemely._id %>/<%= egyFilm._id %>/torles" data-toggle="tooltip" data-placement="top" title="Törlés"><i class="far fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        </tbody>
+		<% }) %>
+
+    </table>
+
+    <div class="col-3 mx-auto">
+    <a class="btn btn-block btn-primary" href="/filmek/uj/<%= szemely._id %>" role="button">Új film hozzáadása</a>
+    <a class="btn btn-block btn-warning" href="/szemelyek">Vissza</a>
+    </div>
+
+    <%- include('footer') -%>
