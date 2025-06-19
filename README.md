@@ -1,4 +1,4 @@
-# Movie library database JavaScript
+# Movie library database - JavaScript
 
 The goal of my project is to create a movie library database for a community. A table lists the data on the films watched and the data on the people, per person. This database helps people in choosing films.
 
